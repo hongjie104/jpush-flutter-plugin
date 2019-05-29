@@ -8,6 +8,7 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import cn.jpush.android.data.JPushLocalNotification;
+import cn.jpush.android.service.PushService;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
