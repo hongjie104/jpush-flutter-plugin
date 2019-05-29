@@ -12,6 +12,10 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <!--开机广播-->
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <!--网络状态改变广播-->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
                 <category android:name="${applicationId}" />
             </intent-filter>
         </receiver>

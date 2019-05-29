@@ -247,6 +247,9 @@ public class JPushPlugin implements MethodCallHandler {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            // 启动极光推送的服务
+            Intent pushintent = new Intent(context, PushService.class);
+            context.startService(pushintent);
             String action = intent.getAction();
             if (action.equals(JPushInterface.ACTION_REGISTRATION_ID)) {
                 String rId = intent.getStringExtra(JPushInterface.EXTRA_REGISTRATION_ID);
