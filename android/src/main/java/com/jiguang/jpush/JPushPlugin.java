@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.xiaomi.mipush.sdk.MiPushClient;
+
 import org.json.JSONObject;
 
 import cn.jpush.android.data.JPushLocalNotification;
@@ -205,6 +207,7 @@ public class JPushPlugin implements MethodCallHandler {
         } else {
             result.success(rid);
         }
+//        MiPushClient.getRegId(registrar.context());
     }
 
 
