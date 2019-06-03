@@ -38,7 +38,7 @@ public class JPushPlugin implements MethodCallHandler {
     static List<Map<String, Object>> openNotificationCache = new ArrayList<>();
 
     private boolean dartIsReady = false;
-    private boolean jpushDidinit = false;
+//    private boolean jpushDidinit = false;
 
     private List<Result> getRidCache;
 
@@ -358,7 +358,7 @@ public class JPushPlugin implements MethodCallHandler {
             return;
         }
 
-        JPushPlugin.instance.jpushDidinit = true;
+//        JPushPlugin.instance.jpushDidinit = true;
 
         // try to clean getRid cache
         JPushPlugin.instance.scheduleCache();
