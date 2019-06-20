@@ -314,7 +314,7 @@ static NSMutableArray<FlutterResult>* getRidResults;
   if (_isJPushDidLogin) {// 第一次获取未登录情况
     result(@[[JPUSHService registrationID]]);
   } else {
-    [getRidResults addObject:result];
+    // [getRidResults addObject:result];
     result(@"");
   }
 #endif
