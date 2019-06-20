@@ -315,6 +315,7 @@ static NSMutableArray<FlutterResult>* getRidResults;
     result(@[[JPUSHService registrationID]]);
   } else {
     [getRidResults addObject:result];
+    result(@"");
   }
 #endif
 }
