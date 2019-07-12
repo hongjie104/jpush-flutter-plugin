@@ -3,10 +3,8 @@ package com.jiguang.jpush;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+//import android.os.Build;
 import android.util.Log;
-
-import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
 
@@ -255,11 +253,12 @@ public class JPushPlugin implements MethodCallHandler {
         public void onReceive(Context context, Intent intent) {
             // 启动极光推送的服务
             Intent pushintent = new Intent(context, PushService.class);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(pushintent);
-            } else {
-                context.startService(pushintent);
-            }
+            context.startService(pushintent);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                context.startForegroundService(pushintent);
+//            } else {
+//                context.startService(pushintent);
+//            }
             String action = intent.getAction();
             if (action.equals(JPushInterface.ACTION_REGISTRATION_ID)) {
                 String rId = intent.getStringExtra(JPushInterface.EXTRA_REGISTRATION_ID);
