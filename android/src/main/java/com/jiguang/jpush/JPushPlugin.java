@@ -4,10 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 //import android.os.Build;
+import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONObject;
 
+import cn.jiguang.jmlinksdk.api.JMLinkAPI;
+import cn.jiguang.jmlinksdk.api.JMLinkCallback;
 import cn.jpush.android.data.JPushLocalNotification;
 import cn.jpush.android.service.PushService;
 import io.flutter.plugin.common.MethodCall;
@@ -57,6 +60,18 @@ public class JPushPlugin implements MethodCallHandler {
         this.getRidCache = new ArrayList<>();
 
         instance = this;
+
+        // 初始化魔链
+        JMLinkAPI.getInstance().init(registrar.context());
+        Uri uri = registrar.activity().getIntent().getData();
+        if (uri != null) {
+            //uri不为null，表示应用是从scheme拉起
+//            uri.getHost();
+            Map<String, Object> openData = new HashMap<String, Object>();
+            openData.put("host", uri.getHost());
+            openData.put("query", uri.getQuery());
+            JPushPlugin.instance.channel.invokeMethod("onOpenApp", openData);
+        }
     }
 
 

@@ -35,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation 'cn.jiguang.sdk:jmlink:1.0.0'
     implementation 'cn.jiguang.sdk:jpush:3.3.1'
     implementation 'cn.jiguang.sdk:jcore:2.0.1'
     implementation 'cn.jiguang.sdk.plugin:xiaomi:3.3.1'

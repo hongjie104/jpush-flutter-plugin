@@ -24,6 +24,7 @@ class JPush {
     EventHandler _onReceiveNotification;
     EventHandler _onOpenNotification;
     EventHandler _onReceiveMessage;
+    EventHandler _onOpenApp;
 
     void setup({
       String appKey,
@@ -40,10 +41,12 @@ class JPush {
       EventHandler onReceiveNotification,
       EventHandler onOpenNotification,
       EventHandler onReceiveMessage,
+      EventHandler onOpenApp,
     }) {
       _onReceiveNotification = onReceiveNotification;
       _onOpenNotification = onOpenNotification;
       _onReceiveMessage = onReceiveMessage;
+      _onOpenApp = onOpenApp;
       _channel.setMethodCallHandler(_handleMethod);
     }
 
@@ -55,6 +58,8 @@ class JPush {
           return _onOpenNotification(call.arguments.cast<String, dynamic>());
         case "onReceiveMessage":
           return _onReceiveMessage(call.arguments.cast<String, dynamic>());
+        case "onOpenApp":
+          return _onOpenApp(call.arguments.cast<String, dynamic>());
         default:
           throw new UnsupportedError("Unrecognized Event");
       }
