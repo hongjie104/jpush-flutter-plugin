@@ -34,7 +34,6 @@
                 <category android:name="${applicationId}" />
             </intent-filter>
         </receiver>
-
         <!--<receiver-->
             <!--android:name="cn.jpush.android.service.PushReceiver"-->
             <!--tools:node="replace"-->

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 //import android.os.Build;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -107,7 +108,10 @@ public class JPushPlugin implements MethodCallHandler {
             getRegistrationID(call, result);
         } else if (call.method.equals("sendLocalNotification")) {
             sendLocalNotification(call, result);
-        } else {
+        } else if (call.method.equals("scheduleCache")) {
+            scheduleCache();
+        }
+        else {
             result.notImplemented();
         }
     }
@@ -123,18 +127,38 @@ public class JPushPlugin implements MethodCallHandler {
         JPushInterface.setChannel(registrar.context(), channel);
 
         JPushPlugin.instance.dartIsReady = true;
+        Log.d("JPushPlugin", "setup is ok");
 
-        // try to clean getRid cache
-        scheduleCache();
+        //------test
+//        Map<String, Object> notification= new HashMap<>();
+//        notification.put("title", "aaa");
+//        notification.put("alert", "bbb");
+//        notification.put("extras", "cccc");
+//        JPushPlugin.openNotificationCache.add(notification);
+        //------test
+
+//        // try to clean getRid cache
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                scheduleCache();
+//            }
+//        }, 3000);
     }
 
     public void scheduleCache() {
+        Log.d("JPushPlugin", "scheduleCache begin");
         if (dartIsReady) {
+            Log.d("JPushPlugin", "111111111");
             // try to shedule notifcation cache
             for (Map<String, Object> notification: JPushPlugin.openNotificationCache) {
+                Log.d("JPushPlugin", "222222222222");
                 JPushPlugin.instance.channel.invokeMethod("onOpenNotification", notification);
-                JPushPlugin.openNotificationCache.remove(notification);
+                break;
             }
+            JPushPlugin.openNotificationCache.clear();
+            Log.d("JPushPlugin", "3333333333333");
         }
         String rid = JPushInterface.getRegistrationID(registrar.context());
         boolean ridAvailable = rid != null && !rid.isEmpty();
@@ -210,7 +234,13 @@ public class JPushPlugin implements MethodCallHandler {
     }
 
     public void getLaunchAppNotification(MethodCall call, Result result) {
-
+        if (JPushPlugin.openNotificationCache.size() > 0) {
+            final Map<String, Object> t = JPushPlugin.openNotificationCache.get(0);
+            JPushPlugin.openNotificationCache.clear();
+            result.success(t);
+        } else {
+            result.success(new HashMap<>());
+        }
     }
 
     public void getRegistrationID(MethodCall call, Result result) {

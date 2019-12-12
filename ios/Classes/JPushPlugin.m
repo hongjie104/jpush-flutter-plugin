@@ -399,7 +399,8 @@ static NSMutableArray<FlutterResult>* getRidResults;
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
   if (launchOptions != nil) {
-    _launchNotification = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    // _launchNotification = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    _launchNotification = launchOptions;
     _launchNotification = [self jpushFormatAPNSDic:_launchNotification.copy];
   }
   
