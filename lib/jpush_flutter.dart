@@ -31,7 +31,7 @@ class JPush {
     bool debug = false,
   }) {
     _channel.invokeMethod('setup', {
-      'appKey': appKey,
+      'appKey': '\$$appKey',
       'channel': channel,
       'production': production,
       'debug': debug
